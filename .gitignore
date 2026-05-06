@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+env/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dataset (large files)
+ml/dataset/raw/
+ml/dataset/images/
+ml/dataset/labels/
+ml/dataset/*.zip
+ml/dataset/*.tar.gz
+
+# Model Weights (large files)
+ml/weights/*.pt
+ml/runs/
+
+# Node
+frontend/angular-app/node_modules/
+frontend/angular-app/dist/
+frontend/angular-app/.angular/
