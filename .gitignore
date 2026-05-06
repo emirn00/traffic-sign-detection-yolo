@@ -41,3 +41,10 @@ ml/runs/
 frontend/angular-app/node_modules/
 frontend/angular-app/dist/
 frontend/angular-app/.angular/
+
+# YOLO & Misc
+runs/
+yolov8n.pt
+**/*.pt
+!backend/model/best.pt
+.agents/

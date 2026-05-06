@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="glass-panel">
+    
+    <div class="header">
+      <h1>Traffic Sign Detection</h1>
+      <p>Powered by YOLOv8 and AI</p>
+    </div>
+
+    <div class="upload-section">
+      <div class="file-drop-area" [class.active]="fileSelected">
+        <input type="file" class="file-input" accept="image/*" (change)="onFileSelected($event)">
+        <span class="upload-icon">📷</span>
+        <h3 *ngIf="!fileSelected">Drag & drop or click to upload</h3>
+        <h3 *ngIf="fileSelected" style="color: var(--primary);">{{ selectedFileName }}</h3>
+        <p *ngIf="!fileSelected" style="color: var(--text-muted); margin-top: 0.5rem;">Supports JPG, PNG</p>
+      </div>
+
+      <button class="btn-primary" [disabled]="!selectedFile || isProcessing" (click)="detectSigns()">
+        <span *ngIf="!isProcessing">Detect Traffic Signs 🚦</span>
+        <div *ngIf="isProcessing" class="spinner"></div>
+        <span *ngIf="isProcessing">Processing Image...</span>
+      </button>
+    </div>
+
+    <!-- Hata Mesajı -->
+    <div *ngIf="errorMessage" style="color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Sonuçlar Bölümü -->
+    <div class="results-section" *ngIf="imageUrl">
+      
+      <div class="canvas-container">
+        <!-- Orijinal resmi göstermiyoruz, üzerine çizim yaptığımız canvas'ı gösteriyoruz -->
+        <canvas #imageCanvas></canvas>
+      </div>
+
+      <div *ngIf="detections.length > 0">
+        <h3 style="margin-bottom: 1rem;">Detections ({{ detections.length }})</h3>
+        <div class="detections-list">
+          <div class="detection-card" *ngFor="let det of detections">
+            <span class="label">{{ det.label.replace('_', ' ') }}</span>
+            <span class="confidence">{{ (det.confidence * 100) | number:'1.0-1' }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="detections.length === 0 && !isProcessing && hasResult" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+        No traffic signs detected in this image.
+      </div>
+
+    </div>
+
+  </div>
+</div>
